@@ -5,11 +5,11 @@ class LinearRegression:
     def __init__(self):
         self.coef_ = 0
         self.intercept_ = 0
-        self.num_iter = 100
+        self.n_iter_ = 100
         self.learning_rate = 0.01
 
     def fit(self, X, y):
-        for i in range(self.num_iter):
+        for i in range(self.n_iter_):
             self.coef_ -= self.learning_rate * self.derivation_coef_(X, y)
             self.intercept_ -= self.learning_rate * self.derivation_intercept_(X, y)
         return

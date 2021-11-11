@@ -1,10 +1,11 @@
 import numpy as np
+from numpy.core.fromnumeric import size
 class AdalineGD(object):
-    def self.__init__(self, eta=0.01, n_iter=50, random_state=1):
+    def __init__(self, eta=0.01, n_iter=50, random_state=1):
         self.eta = eta
         self.n_iter = n_iter
         self.random_state = random_state
-    def fit(X, y):
+    def fit(self, X, y):
         rgen = np.random.RandomState(self.random_state)
         self.w_ = rgen.normal(loc=0, scale=0.01, size=1 + X.shape[1])
         self.cost_ = []
@@ -14,7 +15,7 @@ class AdalineGD(object):
             errors = (y - output)
             self.w_[1:] += self.eta * X.T.dot(errors)
             self.w_[0] += self.eta * errors.sum()
-            cost = (errors**2).sum() / 2
+            cost = (errors ** 2).sum() / 2
             self.cost_.append(cost)
         return self
     def net_input(self, X):
@@ -23,5 +24,4 @@ class AdalineGD(object):
         return X
     def predict(self, X):
         return np.where(self.activation(self.net_input(X)) >= 0, 1, -1)
-
-
+    
